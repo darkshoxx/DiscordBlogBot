@@ -3,10 +3,11 @@ import html
 import re
 from hashlib import md5
 # General imports
-from typing import Tuple
+from typing import Tuple, Union
 
 import aiohttp
 import discord
+from discord.abc import GuildChannel
 from discord.ext import commands, tasks
 
 from DiscordBlogBot.repo_secrets import (BLOGS, BOT_TOKEN, CHANNEL_ID,
@@ -15,21 +16,26 @@ from DiscordBlogBot.repo_secrets import (BLOGS, BOT_TOKEN, CHANNEL_ID,
 LOOP_SPEED = 5
 
 # TODO change prints to logging
-# TODO Testing
 # TODO Error Handling
 # TODO Precommit
 # TODO Tox
 # TODO Github Actions
-# TODO Run on server instead of locally
 # TODO Annotate
 # TODO Docstings
 # TODO Consider environment variables#
 # TODO Make better Readme
+# TODO turn URL_Lists into Dataclasses
 
 
 # printing hashes of secrets instead of secrets
-def print_secret(secret_to_hash):
-    """Returns MD5 hash of an input."""
+def print_secret(secret_to_hash: Union[int, str]) -> str:
+    """Returns MD5 hash of an input.
+    Parameters:
+    secret_to_hash (Union[int, str]) a secret whose hash should be printed
+
+    Returns:
+    hexdigest (str) hexdigest of md5 of initial secret
+    """
     try:
         encoded_string = str(secret_to_hash).encode("utf-8")
         hash_object = md5(encoded_string, usedforsecurity=False)
@@ -50,6 +56,13 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 async def fetch_latest_wp_blog_post(
     session: aiohttp.ClientSession, blog_dict: dict
 ) -> Tuple[int, str]:
+    """ Gets the most recent blog post from a Wordpress blog.
+    Parameters:
+    session (aiohttp.ClientSession): client session to make GET request
+    blog_dict (dict): dict containing info needed to fetch blog and make string
+
+    Returns: blog_id (int), print_string
+    """
     blog_api = blog_dict["url"]
     # asynch context manager (!)
     async with session.get(
@@ -79,6 +92,13 @@ async def fetch_latest_wp_blog_post(
 async def fetch_latest_non_wp_blog_post(
     session: aiohttp.ClientSession, blog_dict: dict
 ) -> Tuple[str, str]:
+    """ Gets the most recent blog post from a Non-Wordpress blog.
+    Parameters:
+    session (aiohttp.ClientSession): client session to make GET request
+    blog_dict (dict): dict containing info needed to fetch blog and make string
+
+    Returns: blog_slug (str), print_string (str)
+    """
     update_url = blog_dict["url"] + blog_dict["update_route"]
     async with session.get(update_url) as response:
         response.raise_for_status()
@@ -97,7 +117,17 @@ async def fetch_latest_non_wp_blog_post(
             return None, None
 
 
-async def send_latest_blog_post(channel, blog_info_to_be_printed) -> None:
+async def send_latest_blog_post(
+    channel: GuildChannel,
+    blog_info_to_be_printed: str
+) -> None:
+    """ Sends the printstring to the discord channel.
+    Parameters:
+    channel (GuildChannel): GuildChannel object to send post to
+    blog_info_to_be_printed (str): pre-generated string to send to channel
+
+    Raises (Exception): if channel not found
+    """
     # TODO replace with logger
     print(blog_info_to_be_printed)
     if channel:
@@ -108,7 +138,15 @@ async def send_latest_blog_post(channel, blog_info_to_be_printed) -> None:
 
 # Event decorator for discord bot to loop
 @tasks.loop(seconds=LOOP_SPEED)
-async def blog_post_task(session, channel):
+async def blog_post_task(
+    session: aiohttp.ClientSession,
+    channel: GuildChannel
+) -> None:
+    """ Loops and calls fetchers and sender.
+    Parameters:
+    channel (GuildChannel): GuildChannel object to send post to
+    session (aiohttp.ClientSession): client session to make GET request
+    """
     # TODO check session is alive at beginning of each loop
 
     # Iterate through Wordpress blogs
@@ -136,6 +174,9 @@ async def blog_post_task(session, channel):
 # Event decorator for discord bots
 @bot.event
 async def on_ready():
+    """ Startup configurations.Gets session and channel object,
+        Populates the buffers.
+    """
     # Called once when the bot is initialized
     print(
         f"Logged in as {bot.user.name} with ID ({print_secret(bot.user.id)})"
