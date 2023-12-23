@@ -20,8 +20,7 @@ LOOP_SPEED = 5
 # TODO Precommit
 # TODO Tox
 # TODO Github Actions
-# TODO Annotate
-# TODO Docstings
+# TODO Annotate, Docstings in other files
 # TODO Consider environment variables#
 # TODO Make better Readme
 # TODO turn URL_Lists into Dataclasses
