@@ -1,5 +1,5 @@
 # Local imports
-from repo_secrets import NON_WP_BLOGS, BLOGS, BOT_TOKEN, CHANNEL_ID
+from DiscordBlogBot.repo_secrets import NON_WP_BLOGS, BLOGS, BOT_TOKEN, CHANNEL_ID
 
 # General imports
 from typing import Tuple
