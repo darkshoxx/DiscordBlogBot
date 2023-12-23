@@ -1,26 +1,31 @@
-import pytest
+import asyncio
 from unittest.mock import AsyncMock
-from DiscordBlogBot.main import blog_post_task, intents
+
+import aiohttp
+import pytest
 from aioresponses import aioresponses
 from discord.ext import commands
-import aiohttp
-import asyncio
+
+from DiscordBlogBot.main import blog_post_task, intents
+
+MOCK_BOT_TOKEN = "mock_bot_token"  # nosec
 
 # Sample blog post response from the WordPress API
 SAMPLE_BLOG_POST = [
     {
-        'id': 123,
-        'title': {'rendered': 'Test Title'},
-        'date': '2022-01-01T12:00:00',
-        'link': 'https://example.com/test-post',
+        "id": 123,
+        "title": {"rendered": "Test Title"},
+        "date": "2022-01-01T12:00:00",
+        "link": "https://example.com/test-post",
     }
 ]
 
 # Sample WordPress blog information
-WP_BLOG_INFO = {'author': 'Author1', 'url': 'https://wordpress-site-1.com'}
+WP_BLOG_INFO = {"author": "Author1", "url": "https://wordpress-site-1.com"}
 
 # Sample channel ID
 CHANNEL_ID = 123456789012345678
+
 
 @pytest.mark.asyncio
 async def test_integration_wp_blog_and_bot():
@@ -34,7 +39,7 @@ async def test_integration_wp_blog_and_bot():
     bot.loop = asyncio.get_event_loop()
 
     # Set the bot's token
-    bot.token = "mock_bot_token"
+    bot.token = MOCK_BOT_TOKEN  # nosec
 
     # Mock the bot's get_channel function for fetching the bot channel
     async def mock_get_channel(channel_id):
