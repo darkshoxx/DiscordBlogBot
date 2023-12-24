@@ -1,0 +1,12 @@
+name: quick-pytest-action
+on: [push]
+jobs:
+  job-1:
+    runs-on: [self-hosted]
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip list
+      - run: pip install -r requirements.txt
+      - run: pip install -r requirements-dev.txt
+      - run: pip install -e .
+      - run: pytest ./testing
