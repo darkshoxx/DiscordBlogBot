@@ -1,17 +1,18 @@
-# Local imports
+# Base imports
 import html
 import os
 import re
 from hashlib import md5
-# General imports
 from typing import Tuple, Union
 
+# Installed Imports
 import aiohttp
 import discord
 from discord.abc import GuildChannel
 from discord.ext import commands, tasks
 from dotenv import load_dotenv
 
+# Local Imports
 from DiscordBlogBot.blog_list import BLOGS, NON_WP_BLOGS
 
 load_dotenv()
