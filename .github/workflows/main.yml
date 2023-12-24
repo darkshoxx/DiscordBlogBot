@@ -1,0 +1,8 @@
+name: quick-pytest-action
+on: [push]
+jobs:
+  job-1:
+    runs-on: [self-hosted]
+    steps:
+      - uses: actions/checkout@v4
+      - run: pytest ./testing
