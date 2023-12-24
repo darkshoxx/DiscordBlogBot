@@ -8,10 +8,11 @@ from typing import Tuple, Union
 
 import aiohttp
 import discord
-from blog_list import BLOGS, NON_WP_BLOGS
 from discord.abc import GuildChannel
 from discord.ext import commands, tasks
 from dotenv import load_dotenv
+
+from DiscordBlogBot.blog_list import BLOGS, NON_WP_BLOGS
 
 load_dotenv()
 
