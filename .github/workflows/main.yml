@@ -5,6 +5,4 @@ jobs:
     runs-on: [self-hosted]
     steps:
       - uses: actions/checkout@v4
-      - run: conda init
-      - run: conda activate DiscordBot
       - run: pip list
