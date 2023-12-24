@@ -12,4 +12,5 @@ jobs:
       - name: do pytests 
         run: pytest ./testing
         env:
-          CHANNEL_ID: ${{ secrets.PUBLIC_NUMBER_3 }}
+          CHANNEL_ID: ${{ secrets.CHANNEL_ID }}
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
