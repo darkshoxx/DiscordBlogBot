@@ -1,5 +1,6 @@
 # Local imports
 import html
+import os
 import re
 from hashlib import md5
 # General imports
@@ -7,21 +8,23 @@ from typing import Tuple, Union
 
 import aiohttp
 import discord
+from blog_list import BLOGS, NON_WP_BLOGS
 from discord.abc import GuildChannel
 from discord.ext import commands, tasks
+from dotenv import load_dotenv
 
-from DiscordBlogBot.repo_secrets import (BLOGS, BOT_TOKEN, CHANNEL_ID,
-                                         NON_WP_BLOGS)
+load_dotenv()
+
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+CHANNEL_ID = int(os.getenv("CHANNEL_ID"))
 
 LOOP_SPEED = 5
 
 # TODO change prints to logging
 # TODO Error Handling
-# TODO Precommit
 # TODO Tox
 # TODO Github Actions
 # TODO Annotate, Docstings in other files
-# TODO Consider environment variables#
 # TODO Make better Readme
 # TODO turn URL_Lists into Dataclasses
 

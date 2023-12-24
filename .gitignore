@@ -1,5 +1,6 @@
 scratch.py
-repo_secrets.py
+
+DiscordBlogBot/repo_secrets.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
