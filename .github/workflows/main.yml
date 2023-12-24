@@ -5,7 +5,8 @@ jobs:
     runs-on: [self-hosted]
     steps:
       - uses: actions/checkout@v4
-      - run: echo "PUBLC_NUMBER_3 is" $PUBLC_NUMBER_3
+      - run: |
+          echo "PUBLIC_NUMBER_3 is: ${{ secrets.PUBLIC_NUMBER_3 }}"
       - run: pip list
       - run: pip install -r requirements.txt
       - run: pip install -r requirements-dev.txt
