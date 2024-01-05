@@ -5,7 +5,7 @@ Written by darkshoxx. Equipped with an MIT license, so enjoy distribution.
 
 ## Requirements
 
-- Server or PC running python 3.7+
+- Server or PC running python 3.8+
 - Discord server where you are owner
 
 ## General Setup
@@ -89,7 +89,7 @@ if the website does NOT have such a thing, I'm always open to pull requests.
 
 ## Install and launch
 
-Make sure you have python (I recommend a virtual environment of at least 3.7) and
+Make sure you have python (I recommend a virtual environment of at least 3.8) and
 pip install the requirements:
 
 ```python
