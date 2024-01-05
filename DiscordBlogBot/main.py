@@ -22,14 +22,6 @@ CHANNEL_ID = int(os.getenv("CHANNEL_ID"))
 
 LOOP_SPEED = 5
 
-# TODO change prints to logging
-# TODO Error Handling
-# TODO Tox
-# TODO Github Actions
-# TODO Annotate, Docstings in other files
-# TODO Make better Readme
-# TODO turn URL_Lists into Dataclasses
-
 
 # printing hashes of secrets instead of secrets
 def print_secret(secret_to_hash: Union[int, str]) -> str:

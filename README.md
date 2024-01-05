@@ -99,6 +99,16 @@ pip install -r requirements.txt
 finally, run main.py  
 Tested on Windows and Linux Ubuntu
 
+## Current TODO list
+
+- DOCKERISE
+- change prints to logging
+- Error Handling
+- Continue Github Actions
+- Annotate, Docstings in other files
+- Make better Readme
+- turn URL_Lists into Dataclasses
+
 ## Errors, problems
 
 Please raise an issue in this repo if the bot breaks or you have troubles with
