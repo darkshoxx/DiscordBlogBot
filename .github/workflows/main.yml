@@ -9,7 +9,7 @@ jobs:
       - run: pip install -r requirements.txt
       - run: pip install -r requirements-dev.txt
       - run: pip install -e .
-      - name: do pytests 
+      - name: do pytests
         run: pytest ./testing
         env:
           CHANNEL_ID: ${{ secrets.CHANNEL_ID }}
